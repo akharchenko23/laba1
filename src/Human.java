@@ -1,6 +1,6 @@
 //This class describes a human being.
 import Enums.Sex;
-
+@SuppressWarnings("unused")
 public class Human {
     protected String name;
     protected Sex sex;
