@@ -43,6 +43,7 @@ public class Human {
         age++;
     }
 
+    //Returns something like "Харченко Аліна. Дівчина, 18"
     public String toString(){
         return name + ". " + sex + ", " + age;
     }
