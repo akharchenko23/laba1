@@ -4,9 +4,8 @@ public class PrintArray {
     public static void printArray(Object[] array) {
         StringBuilder sb = new StringBuilder();
         for(Object obj : array){
-            sb.append(obj).append(", "); // prints every number one by one, separated by comas
+            sb.append(obj).append("\n"); // prints every number one by one, separated by comas
         }
-        sb.setCharAt(sb.length() - 2, '.'); // replaces last coma with a dot
         System.out.println(sb.toString());
     }
 

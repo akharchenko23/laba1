@@ -10,7 +10,7 @@ public class Human {
     protected int age;
 
     public Human(String name, Sex sex, int age){
-        this.name = name;
+        this.name = refactor(name);
         this.sex = sex;
         this.age = age;
     }
