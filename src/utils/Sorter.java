@@ -1,9 +1,6 @@
 package utils;
 
-import Enums.Sex;
 import Humans.*;
-
-import static utils.PrintArray.printArray;
 
 public class Sorter {
     /**
