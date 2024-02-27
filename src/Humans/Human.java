@@ -1,5 +1,8 @@
-//This class describes a human being.
+package Humans;//This class describes a human being.
 import Enums.Sex;
+
+import java.util.StringTokenizer;
+
 @SuppressWarnings("unused")
 public class Human {
     protected String name;
@@ -10,6 +13,29 @@ public class Human {
         this.name = name;
         this.sex = sex;
         this.age = age;
+    }
+
+    public Human(){
+        name = "Людина";
+        sex = Sex.INTERSEX;
+        age = 0;
+    }
+
+    /**
+     * Refactors name, so it always starts with a letter and has only one space between every two words
+     * @param name Starting name
+     * @return Refactored name
+     */
+    private String refactor(String name){
+        if(name == null) return "";
+        StringTokenizer st = new StringTokenizer(name);
+        StringBuilder res = new StringBuilder();
+        while(st.hasMoreTokens()){
+            res.append(st.nextToken());
+            res.append(" ");
+        }
+        res.deleteCharAt(res.length()-1);
+        return res.toString();
     }
 
     public String getName() {

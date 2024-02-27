@@ -1,7 +1,9 @@
+package Humans;
+
 import Enums.Sex;
 
 @SuppressWarnings("unused")
-//студент успадковує від людини поля ім'я, вік, стать. Має свої групу(у значенні спеціальність) та курс
+//Студент успадковує від людини поля ім'я, вік, стать. Має свої групи (у значенні спеціальність) та курс
 public class Student extends Human {
 
     protected int course;
@@ -47,7 +49,7 @@ public class Student extends Human {
     }
 
     public String toString() {
-        return name + ". " + sex + ", " + age + " | " + course + ", " + group;
+        return super.toString() + " | " + course + ", " + group;
     }
 
 }
