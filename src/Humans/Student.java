@@ -49,7 +49,7 @@ public class Student extends Human {
     }
 
     public String toString() {
-        return super.toString() + " | " + course + ", " + group;
+        return super.toString() + " | " + group + "-" + course;
     }
 
 }
