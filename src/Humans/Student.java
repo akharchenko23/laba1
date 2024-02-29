@@ -14,7 +14,7 @@ public class Student extends Human {
 
     }
 
-    public Student(String name, Sex sex, int age, int course, String group) {
+    public Student(String name, Sex sex, int age, String group, int course) {
         super(name, sex, age);
         this.course = course;
         this.group = group;

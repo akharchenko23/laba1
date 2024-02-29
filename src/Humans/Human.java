@@ -68,6 +68,11 @@ public class Human {
     public void incAge(){
         age++;
     }
+    public boolean equals(Human human){
+        return this.getName().equals(human.getName())
+                && this.getAge() == human.getAge()
+                && this.getSex() == human.getSex();
+    }
 
     //Returns something like "Харченко Аліна. Дівчина, 18"
     public String toString(){

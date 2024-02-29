@@ -22,5 +22,8 @@ public class Teacher extends Human {
     public void setPosition(Position position) {
         this.position = position;
     }
+    public String toString(){
+        return super.toString() + " | " + position;
+    }
 
 }
