@@ -4,6 +4,7 @@ import Humans.Student;
 import Humans.Teacher;
 import NaUKMA.Chair;
 import NaUKMA.Faculty;
+import NaUKMA.University;
 import utils.Array;
 import utils.Sorter;
 
@@ -12,6 +13,7 @@ public class Tester {
         Student[] students = new Student[2];
         Teacher[] teachers = new Teacher[2];
         Chair[] chairs;
+        Faculty[] faculties;
         Student st1 = new Student("Тимко", Sex.MALE, 18, "ІПЗ", 1);
         Student st2 = new Student("Аліна", Sex.FEMALE, 18, "ІПЗ", 1);
         Student st3 = new Student("Дарія", Sex.INTERSEX, 17, "ІПЗ", 1);
@@ -24,6 +26,9 @@ public class Tester {
         Chair mathChair = new Chair("Кафедра математики", teachers, students);
         chairs = new Chair[]{ukrLanguageChair, mathChair};
         Faculty fi = new Faculty("ФІ", chairs);
+        Faculty fgn = new Faculty("ФГН", chairs);
+        faculties = new Faculty[]{fi, fgn};
+        University NaUKMA = new University("НаУКМА", faculties);
         //тест редагування студента
         ukrLanguageChair.changeStudent(st1, st2);
         Array.print(students);
@@ -40,6 +45,10 @@ public class Tester {
         Sorter.sortName(ukrLanguageChair.getStudents());
         Array.print(ukrLanguageChair.getStudents());
 
-        System.out.println(ukrLanguageChair);
+       // System.out.println(ukrLanguageChair);
+
+
+        System.out.println(NaUKMA);
+
     }
 }

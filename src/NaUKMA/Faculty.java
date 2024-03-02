@@ -83,4 +83,13 @@ public class Faculty {
         }
         chairs = survivors;
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append('\n').append(name).append('\n');
+        for (Chair chair : chairs) {
+            sb.append(chair).append("\n");
+        }
+        return sb.toString();
+    }
 }

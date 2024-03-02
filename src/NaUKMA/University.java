@@ -76,4 +76,13 @@ public class University {
         }
         faculties = survivors;
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append('\n').append(name).append('\n');
+        for (Faculty faculty : faculties) {
+            sb.append(faculty).append("\n");
+        }
+        return sb.toString();
+    }
 }
