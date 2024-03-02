@@ -38,8 +38,6 @@ public class Faculty {
         return this;
     }
 
-    //редагувати кафедру
-
     /**
      * можна редагувати кафедру
      * @param toChangeChair
