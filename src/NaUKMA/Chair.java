@@ -97,7 +97,7 @@ public class Chair {
     }
 
     /**
-     * редагує існуючого студента кафедри
+     * редагує існуючого студента кафедри. можемо замінити одного студента іншим
      * @param changedStudent студент на якого замінюємо
      * @return
      */
@@ -106,7 +106,21 @@ public class Chair {
             if(students[i] == toChangeStudent){
                 students[i] = changedStudent;
             }
-            students[i] = students[i];
+
+        }
+        return this;
+    }
+    /**
+     * редагує існуючого викладача кафедри. можемо замінити одного іншим
+     * @param
+     * @return
+     */
+    public Chair changeTeacher(Teacher toChangeTeacher, Teacher changedTeacher){
+        for (int i = 0; i < teachers.length; i++) {
+            if(teachers[i] == toChangeTeacher){
+                teachers[i] = changedTeacher;
+            }
+
         }
         return this;
     }
