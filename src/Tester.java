@@ -19,6 +19,10 @@ public class Tester {
         students = new Student[]{st1, st2, st3};
         teachers = new Teacher[]{t1,t2,t3};
         Chair test = new Chair("Факультет інформатики", teachers, students);
+        System.out.println("my test");
+        //test.changeStudent(st1, st2);
+        Array.print(students);
+
         test.setStudents(students);
         Array.print(test.getStudents());
         test.kill(st1);

@@ -97,6 +97,21 @@ public class Chair {
     }
 
     /**
+     * редагує існуючого студента кафедри
+     * @param changedStudent студент на якого замінюємо
+     * @return
+     */
+    public Chair changeStudent(Student toChangeStudent, Student changedStudent){
+        for (int i = 0; i < students.length; i++) {
+            if(students[i] == toChangeStudent){
+                students[i] = changedStudent;
+            }
+            students[i] = students[i];
+        }
+        return this;
+    }
+
+    /**
      * Додає студента в базу даних
      *
      * @param newGuy Студент якого треба додати

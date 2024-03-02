@@ -43,7 +43,7 @@ public class Student extends Human {
         if (course < 4) {
             course++;
         } else {
-            // TODO придумати як реалізуємо випускника
+            System.out.println("випускник");
         }
 
     }
