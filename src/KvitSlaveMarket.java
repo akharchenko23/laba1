@@ -59,8 +59,8 @@ public class KvitSlaveMarket {
         Teacher t12 = new Teacher("Кравченко Олег", Sex.MALE, 38, Position.ASSISTANT);
         Teacher t13 = new Teacher("Квіт Сергій", Sex.MALE, 60, Position.PRESIDENT);
 
-        studentsMathChair = new Student[]{st1, st2, st4};
-        studentsITchair = new Student[]{st5, st6};
+        studentsMathChair = new Student[]{st5, st6};
+        studentsITchair = new Student[]{st1, st2, st3, st4};
         studentsEconomicsChair = new Student[] {st9, st10, st11, st12, st13, st14};
         studentsLiteratureChair = new Student[]{st15, st16, st17, st18};
         studentsHistoryChair = new Student[]{st7, st8};
