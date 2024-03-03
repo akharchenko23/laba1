@@ -10,7 +10,7 @@ import utils.Sorter;
 
 public class Tester {
     public static void main(String[] args) {
-        Student[] students = new Student[2];
+        Student[] students;/* = new Student[2];*/
         Teacher[] teachers = new Teacher[2];
         Chair[] chairs;
         Faculty[] faculties;
