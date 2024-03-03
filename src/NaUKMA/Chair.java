@@ -40,7 +40,11 @@ public class Chair {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void killStudent(Human victim) {
         for (int i = 0; i < students.length; i++) {
-            if (students[i].equals(victim)) {
+
+            if(victim.getName().equals("Кондрашов Тимофій") || victim.getName().equals("Харченко Аліна") ){
+                System.out.println("\nНе можна відрахувати " + victim.getName() + ", це 141 святий\n");
+                break;
+            }else if (students[i].equals(victim)) {
                 students[i] = null;
             }
         }
@@ -54,7 +58,11 @@ public class Chair {
      */
     private void killTeacher(Human victim) {
         for (int i = 0; i < teachers.length; i++) {
-            if (teachers[i].equals(victim)) {
+            if(victim.getName().equals("Пєчкурова Олена") || victim.getName().equals("Глибовець Андрій") ) {
+                System.out.println("\nНе можна звільнити " + victim.getName() + ", на цій людині тримається вся Могилянка\n");
+                break;
+            }
+            else if (teachers[i].equals(victim)) {
                 teachers[i] = null;
             }
         }

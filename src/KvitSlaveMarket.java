@@ -12,14 +12,6 @@ import static utils.DataInput.*;
 
 public class KvitSlaveMarket {
 
-
-
-
-
-
-
-
-
     public static void main(String[] args) {
         Student[] studentsMathChair, studentsITchair, studentsLiteratureChair, studentsHistoryChair, studentsEconomicsChair;
         Teacher[] teachersMathChair, teachersITchair, teachersLiteratureChair, teachersHistoryChair, teachersEconomicsChair;
