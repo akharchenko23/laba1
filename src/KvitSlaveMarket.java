@@ -427,10 +427,7 @@ public class KvitSlaveMarket {
     }
 
     private static int whatToDo(String... strings) throws IOException {
-        int count = 0;
-        for (String string : strings) {
-            count++;
-        }
+        int count = strings.length;
         StringBuilder sb = new StringBuilder();
         sb.append("\nЩо бажаєте зробити?\n");
         for (int i = 0; i < count; i++) {
@@ -440,21 +437,6 @@ public class KvitSlaveMarket {
         System.out.println(sb);
         System.out.print("\nВаш вибір: ");
         return decide(count);
-    }
-
-    private University createUniversity() throws IOException {
-        return new University(getTitle("університету"), getFaculties());
-    }
-
-    private Faculty[] getFaculties() throws IOException {
-        System.out.print("Скільки факультетів буде містити цей університет?");
-        int numOfFaculties = decide(Integer.MAX_VALUE);
-        Faculty[] faculties = new Faculty[numOfFaculties];
-        for (int i = 0; i < numOfFaculties; i++) {
-            System.out.print("Факультет " + (i + 1) + ": ");
-            faculties[i] = createFaculty();
-        }
-        return faculties;
     }
 
     private static Faculty createFaculty() throws IOException {
