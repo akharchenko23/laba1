@@ -2,6 +2,7 @@ package NaUKMA;
 
 import Humans.Student;
 import Humans.Teacher;
+import utils.Sorter;
 
 /*
 уміє редагувати кафедру, видаляти кафедру, додавати кафедру
@@ -57,7 +58,7 @@ public class Faculty {
      * Видаляє кафедру
      * @param victim кафедра яку видалимо
      */
-    private void deleteChair(Chair victim) {
+    public void deleteChair(Chair victim) {
         for (int i = 0; i < chairs.length; i++) {
             if (chairs[i].equals(victim)) {
                 chairs[i] = null;
@@ -99,13 +100,44 @@ public class Faculty {
     public String getName() {
         return name;
     }
+    public Student[] getStudents(){
+        Student[] students = new Student[0];
+        for(Chair chair : chairs){
+            Student[] expanded = new Student[students.length + chair.getStudents().length];
+            for(int i = 0; i < students.length; i++){
+                expanded[i] = students[i];
+            }
+            for(int i = students.length; i < expanded.length; i++){
+                expanded[i] = chair.getStudents()[i-students.length];
+            }
+            students = expanded;
+        }
+        return students;
+    }
+
+    public Teacher[] getTeachers(){
+        Teacher[] teachers = new Teacher[0];
+        for(Chair chair : chairs){
+            Teacher[] expanded = new Teacher[teachers.length + chair.getTeachers().length];
+            for(int i = 0; i < teachers.length; i++){
+                expanded[i] = teachers[i];
+            }
+            for(int i = teachers.length; i < expanded.length; i++){
+                expanded[i] = chair.getTeachers()[i-teachers.length];
+            }
+            teachers = expanded;
+        }
+        return teachers;
+    }
 
     public String toString(){
+        Sorter.sortName(chairs);
         StringBuilder sb = new StringBuilder();
-        sb.append('\n').append(name).append('\n');
+        sb.append(name).append('\n').append('\n');
         for (Chair chair : chairs) {
-            sb.append(chair).append("\n");
+            sb.append(chair).append('\n');
         }
+        sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
 }

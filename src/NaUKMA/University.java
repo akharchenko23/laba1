@@ -1,5 +1,9 @@
 package NaUKMA;
 
+import Humans.Student;
+import Humans.Teacher;
+import utils.Sorter;
+
 public class University {
     private Faculty[] faculties;
     private String name;
@@ -50,7 +54,7 @@ public class University {
      * Видалення факультету
      * @param victim
      */
-    private void deleteFaculty(Faculty victim) {
+    public void deleteFaculty(Faculty victim) {
         for (int i = 0; i < faculties.length; i++) {
             if (faculties[i].equals(victim)) {
                 faculties[i] = null;
@@ -93,12 +97,44 @@ public class University {
         this.name = name;
     }
 
+    public Student[] getStudents(){
+        Student[] students = new Student[0];
+        for(Faculty faculty : faculties){
+            Student[] expanded = new Student[students.length + faculty.getStudents().length];
+            for(int i = 0; i < students.length; i++){
+                expanded[i] = students[i];
+            }
+            for(int i = students.length; i < expanded.length; i++){
+                expanded[i] = faculty.getStudents()[i-students.length];
+            }
+            students = expanded;
+        }
+        return students;
+    }
+
+    public Teacher[] getTeachers(){
+        Teacher[] teachers = new Teacher[0];
+        for(Faculty faculty : faculties){
+            Teacher[] expanded = new Teacher[teachers.length + faculty.getTeachers().length];
+            for(int i = 0; i < teachers.length; i++){
+                expanded[i] = teachers[i];
+            }
+            for(int i = teachers.length; i < expanded.length; i++){
+                expanded[i] = faculty.getTeachers()[i-teachers.length];
+            }
+            teachers = expanded;
+        }
+        return teachers;
+    }
+
     public String toString(){
+        Sorter.sortName(faculties);
         StringBuilder sb = new StringBuilder();
-        sb.append('\n').append(name).append('\n');
+        sb.append(name).append('\n').append('\n');
         for (Faculty faculty : faculties) {
             sb.append(faculty).append("\n");
         }
+        sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
 }

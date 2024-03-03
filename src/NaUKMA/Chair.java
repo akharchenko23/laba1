@@ -3,6 +3,8 @@ package NaUKMA;
 import Humans.Human;
 import Humans.Student;
 import Humans.Teacher;
+import utils.Array;
+import utils.Sorter;
 
 public class Chair {
     private Student[] students;
@@ -213,8 +215,10 @@ public class Chair {
     }
 
     public String toString(){
+        Sorter.sortName(teachers);
+        Sorter.sortName(students);
         StringBuilder sb = new StringBuilder();
-        sb.append('\n').append(name).append('\n').append("Викладачі:").append('\n');
+        sb.append(name).append('\n').append("Викладачі:").append('\n');
         for(int i = 0; i < teachers.length; i++){
             sb.append(i+1).append(". ").append(teachers[i].toString()).append('\n');
         }

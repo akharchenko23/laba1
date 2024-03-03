@@ -1,26 +1,20 @@
 import Enums.Position;
 import Enums.Sex;
+import Humans.Human;
 import Humans.Student;
 import Humans.Teacher;
 import NaUKMA.Chair;
 import NaUKMA.Faculty;
 import NaUKMA.University;
+import utils.Array;
+import utils.Sorter;
 
 import java.io.IOException;
 
 import static utils.DataInput.*;
 
 public class KvitSlaveMarket {
-
-
-
-
-
-
-
-
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Student[] studentsMathChair, studentsITchair, studentsLiteratureChair, studentsHistoryChair, studentsEconomicsChair;
         Teacher[] teachersMathChair, teachersITchair, teachersLiteratureChair, teachersHistoryChair, teachersEconomicsChair;
         Chair[] chairsFI, chairsFGN, chairsFEN;
@@ -61,7 +55,7 @@ public class KvitSlaveMarket {
 
         studentsMathChair = new Student[]{st5, st6};
         studentsITchair = new Student[]{st1, st2, st3, st4};
-        studentsEconomicsChair = new Student[] {st9, st10, st11, st12, st13, st14};
+        studentsEconomicsChair = new Student[]{st9, st10, st11, st12, st13, st14};
         studentsLiteratureChair = new Student[]{st15, st16, st17, st18};
         studentsHistoryChair = new Student[]{st7, st8};
 
@@ -81,30 +75,370 @@ public class KvitSlaveMarket {
         chairsFEN = new Chair[]{economicsChair};
         chairsFGN = new Chair[]{literatureChair, historyChair};
 
-        Faculty fi = new Faculty("ФІ", chairsFI);
-        Faculty fen = new Faculty("ФЕН", chairsFEN);
-        Faculty fgn = new Faculty("ФГН", chairsFGN);
+        Faculty fi = new Faculty("Факультет Інформатики", chairsFI);
+        Faculty fen = new Faculty("Факультет економічних наук", chairsFEN);
+        Faculty fgn = new Faculty("Факультет гуманітарних наук", chairsFGN);
 
         faculties = new Faculty[]{fi, fen, fgn};
 
         University NaUKMA = new University("НаУКМА", faculties);
 
-        System.out.println(NaUKMA);
-
-
+        welcomeToUniversity(NaUKMA);
+        System.out.println("Гарного вам дня!");
     }
 
-    private int whatToDo(String ... strings) throws IOException {
+
+    private static void welcomeToUniversity(University university) throws IOException {
+        int fate = 0;
+        do {
+            System.out.println("Ласкаво просимо до університету " + university.getName() + "!");
+            switch (whatToDo("Інформація", "Пошук по універу", "Робота з факультетами", "Завершити роботу")) {
+                case 1:
+                    universityInfo(university);
+                    break;
+                case 2:
+                    universitySearch(university);
+                    break;
+                case 3:
+                    facultyWork(university);
+                    break;
+                default:
+                    fate = 2;
+                    break;
+
+            }
+        } while (fate != 2);
+    }
+
+    private static void facultyWork(University university) throws IOException {
+        int victim;
+        int fate = 0;
+        do {
+            showcase(university.getFaculties());
+            switch (whatToDo("Редагувати факультет", "Створити факультет", "Видалити факультет", "Піти звідси")) {
+                case 1:
+                    System.out.print("Який факультет бажаєте редагувати? ");
+                    victim = decide(university.getFaculties().length);
+                    chairWork(university.getFaculties()[victim - 1]);
+                    break;
+                case 2:
+                    university.addFaculty(createFaculty());
+                    break;
+                case 3:
+                    System.out.print("Який факультет бажаєте видалити? (Всіх студентів буде відраховано, а викладачів звільнено): ");
+                    victim = decide(university.getFaculties().length);
+                    university.deleteFaculty(university.getFaculties()[victim - 1]);
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void chairWork(Faculty faculty) throws IOException {
+        int fate = 0;
+        int victim;
+        do {
+            showcase(faculty.getChairs());
+            switch (whatToDo("Перейменувати факультет", "Редагувати кафедру", "Створити кафедру", "Видалити кафедру", "Піти звідси")) {
+                case 1:
+                    faculty.setName(getTitle("факультету"));
+                    break;
+                case 2:
+                    System.out.print("Який факультет бажаєте редагувати? ");
+                    victim = decide(faculty.getChairs().length);
+                    peopleWork(faculty.getChairs()[victim - 1]);
+                    break;
+                case 3:
+                    faculty.addChair(createChair());
+                    break;
+                case 4:
+                    System.out.print("Яку кафедру бажаєте видалити? (Всіх студентів буде відраховано, а викладачів звільнено): ");
+                    victim = decide(faculty.getChairs().length);
+                    faculty.deleteChair(faculty.getChairs()[victim - 1]);
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void peopleWork(Chair chair) throws IOException {
+        int victim;
+        int fate = 0;
+        do {
+            System.out.println(chair);
+            switch (whatToDo("Перейменувати кафедру", "Редагувати студента", "Редагувати викладача", "Зарахувати студента", "Найняти викладача", "Відрахувати студента", "Звільнити викладача", "Інформація", "Піти звідси")) {
+                case 1:
+                    chair.setName(getTitle("кафедри"));
+                    break;
+                case 2:
+                    System.out.print("Якого студента бажаєте редагувати? ");
+                    victim = decide(chair.getStudents().length);
+                    studentWork(chair.getStudents()[victim - 1]);
+                    break;
+                case 3:
+                    System.out.print("Якого викладача бажаєте редагувати? ");
+                    victim = decide(chair.getTeachers().length);
+                    teacherWork(chair.getTeachers()[victim - 1]);
+                    break;
+                case 4:
+                    chair.enslaveMoreStudents(createStudent());
+                    break;
+                case 5:
+                    chair.enslaveMoreTeachers(createTeacher());
+                    break;
+                case 6:
+                    System.out.print("Якого студента бажаєте відрахувати? ");
+                    victim = decide(chair.getStudents().length);
+                    chair.kill(chair.getStudents()[victim - 1]);
+                    break;
+                case 7:
+                    System.out.print("Якого викладача бажаєте звільнити? ");
+                    victim = decide(chair.getTeachers().length);
+                    chair.kill(chair.getTeachers()[victim - 1]);
+                    break;
+                case 8:
+                    chairInfo(chair);
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void chairInfo(Chair chair) throws IOException {
+        int course;
+        int fate = 0;
+        do {
+            switch (whatToDo("Список студентів за курсами", "Загальний список студентів", "Загальний список викладачів", "Знайти студентів за курсом", "Знайти студентів за курсом та посортувати за іменем", "Піти звідси")) {
+                case 1:
+                    Sorter.sortCourse(chair.getStudents());
+                    Array.print(chair.getStudents());
+                    break;
+                case 2:
+                    Sorter.sortName(chair.getStudents());
+                    Array.print(chair.getStudents());
+                    break;
+                case 3:
+                    Sorter.sortName(chair.getTeachers());
+                    Array.print(chair.getTeachers());
+                    break;
+                case 4:
+                    System.out.println("Який курс вас цікавить? ");
+                    course = decide(4);
+                    for (int i = 0, j = 1; i < chair.getStudents().length; i++) {
+                        if (chair.getStudents()[i].getCourse() == course) {
+                            System.out.println(j + ". " + chair.getStudents()[i]);
+                            j++;
+                        }
+                    }
+                    break;
+                case 5:
+                    System.out.println("Який курс вас цікавить? ");
+                    course = decide(4);
+                    Sorter.sortName(chair.getStudents());
+                    for (int i = 0, j = 1; i < chair.getStudents().length; i++) {
+                        if (chair.getStudents()[i].getCourse() == course) {
+                            System.out.println(j + ". " + chair.getStudents()[i]);
+                            j++;
+                        }
+                    }
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void teacherWork(Teacher teacher) throws IOException {
+        int fate = 0;
+        do {
+            System.out.println(teacher);
+            switch (whatToDo("Змінити ім'я", "Змінити вік", "Змінити стать", "Змінити посаду", "піти звідси")) {
+                case 1:
+                    teacher.setName(getName("викладача"));
+                    break;
+                case 2:
+                    teacher.setAge(getAge());
+                    break;
+                case 3:
+                    teacher.setSex(getSex());
+                    break;
+                case 4:
+                    teacher.setPosition(getPosition());
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void studentWork(Student student) throws IOException {
+        int fate = 0;
+        do {
+            System.out.println(student);
+            switch (whatToDo("Змінити ім'я", "Змінити вік", "Змінити стать", "Змінити групу", "Змінити курс", "Піти звідси")) {
+                case 1:
+                    student.setName(getName("студента"));
+                    break;
+                case 2:
+                    student.setAge(getAge());
+                    break;
+                case 3:
+                    student.setSex(getSex());
+                    break;
+                case 4:
+                    student.setGroup(getTitle("групи"));
+                case 5:
+                    student.setCourse(getCourse());
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void showcase(Chair[] chairs) {
+        System.out.println("Наявні кафедри:");
+        for (int i = 0; i < chairs.length; i++) {
+            System.out.println((i + 1) + ". " + chairs[i].getName());
+        }
+    }
+
+    private static void showcase(Faculty[] faculties) {
+        System.out.println("Наявні факультети:");
+        for (int i = 0; i < faculties.length; i++) {
+            System.out.println((i + 1) + ". " + faculties[i].getName());
+        }
+    }
+
+    private static void universitySearch(University university) throws IOException {
+        if (whatToDo("Знайти викладача", "Знайти студента") == 1) {
+            searchForNames(Sorter.sortName(university.getTeachers()));
+        } else {
+            searchForStudents(university);
+        }
+    }
+
+    private static void searchForStudents(University university) throws IOException {
+        int fate = 0;
+        do {
+            switch (whatToDo("Шукати за ім'ям", "Шукати за курсом", "Шукати за спеціальністю", "Піти звідси")) {
+                case 1:
+                    searchForNames(Sorter.sortName(university.getStudents()));
+                    break;
+                case 2:
+                    searchForCourse(university.getStudents());
+                    break;
+                case 3:
+                    searchForGroup(university.getStudents());
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    private static void searchForGroup(Student[] students) throws IOException {
+        System.out.print("Введіть групу: ");
+        String find;
+        boolean notFound = true;
+        do {
+            find = getString();
+        } while (find.isEmpty());
+        System.out.println("Було знайдено: ");
+        for (Student student : students) {
+            if (student.getGroup().length() < find.length()) continue;
+            String group = student.getGroup().toLowerCase().substring(0, find.length());
+            if (find.toLowerCase().equals(group)) {
+                System.out.println(student);
+                notFound = false;
+            }
+        }
+        if (notFound) System.out.println("Нікого");
+    }
+
+    private static void searchForCourse(Student[] students) throws IOException {
+        Sorter.sortName(students);
+        System.out.print("Введіть курс: ");
+        int find;
+        boolean notFound = true;
+        find = decide(4);
+        System.out.println("Було знайдено: ");
+        for (Student student : students) {
+            int course = student.getCourse();
+            if (find == course) {
+                System.out.println(student);
+                notFound = false;
+            }
+        }
+        if (notFound) System.out.println("Нікого");
+    }
+
+    private static void searchForNames(Human[] humans) throws IOException {
+        System.out.print("Введіть ім'я: ");
+        String find;
+        boolean notFound = true;
+        do {
+            find = getString();
+            if (find.isEmpty()) System.out.println("Ім'я має містити хоча б одну літеру: ");
+        } while (find.isEmpty());
+        System.out.println("Було знайдено: ");
+        for (Human human : humans) {
+            if (human.getName().length() < find.length()) continue;
+            String name = human.getName().toLowerCase().substring(0, find.length());
+            if (find.toLowerCase().equals(name)) {
+                System.out.println(human);
+                notFound = false;
+            }
+        }
+        if (notFound) System.out.println("Нікого");
+    }
+
+    private static void universityInfo(University university) throws IOException {
+        int fate = 0;
+        do {
+            switch (whatToDo("Загальний виклад університету", "Список студентів за курсами", "Загальний список студентів", "Загальний список викладачів", "Піти звідси")) {
+                case 1:
+                    System.out.println(university);
+                    break;
+                case 2:
+                    Array.print(Sorter.sortCourse(university.getStudents()));
+                    break;
+                case 3:
+                    Array.print(Sorter.sortName(university.getStudents()));
+                    break;
+                case 4:
+                    Array.print(Sorter.sortName(university.getTeachers()));
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        }while(fate != 2);
+    }
+
+    private static int whatToDo(String... strings) throws IOException {
         int count = 0;
-        for(String string : strings){
-           count++;
+        for (String string : strings) {
+            count++;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Що бажаєте зробити?\n");
-        for(int i = 0; i < count; i++){
-            sb.append(i+1).append(". ").append(strings[i]).append(";\n");
+        sb.append("\nЩо бажаєте зробити?\n");
+        for (int i = 0; i < count; i++) {
+            sb.append(i + 1).append(". ").append(strings[i]).append("\n");
         }
-        System.out.println("Ваш вибір: ");
+        sb.deleteCharAt(sb.length() - 1);
+        System.out.println(sb);
+        System.out.print("\nВаш вибір: ");
         return decide(count);
     }
 
@@ -113,79 +447,67 @@ public class KvitSlaveMarket {
     }
 
     private Faculty[] getFaculties() throws IOException {
-        System.out.println("Скільки факультетів буде містити цей університет?");
-        int numOfFaculties;
-        do {
-            numOfFaculties = getInt();
-        } while (numOfFaculties < 0);
+        System.out.print("Скільки факультетів буде містити цей університет?");
+        int numOfFaculties = decide(Integer.MAX_VALUE);
         Faculty[] faculties = new Faculty[numOfFaculties];
         for (int i = 0; i < numOfFaculties; i++) {
-            System.out.println("Факультет " + i + ": ");
+            System.out.print("Факультет " + (i + 1) + ": ");
             faculties[i] = createFaculty();
         }
         return faculties;
     }
 
-    private Faculty createFaculty() throws IOException {
+    private static Faculty createFaculty() throws IOException {
         return new Faculty(getTitle("факультету"), getChairs());
     }
 
-    private Chair[] getChairs() throws IOException {
-        System.out.println("Скільки кафедр буде містити цей факультет?");
-        int numOfChairs;
-        do {
-            numOfChairs = getInt();
-        } while (numOfChairs < 0);
+    private static Chair[] getChairs() throws IOException {
+        System.out.print("Скільки кафедр буде містити цей факультет?");
+        int numOfChairs = decide(Integer.MAX_VALUE);
         Chair[] chairs = new Chair[numOfChairs];
         for (int i = 0; i < numOfChairs; i++) {
-            System.out.println("Кафедра " + i + ": ");
+            System.out.print("Кафедра " + (i + 1) + ": ");
             chairs[i] = createChair();
         }
         return chairs;
     }
 
-    private Chair createChair() throws IOException {
+    private static Chair createChair() throws IOException {
         return new Chair(getTitle("кафедри"), getTeachers(), getStudents());
     }
 
-    private Student[] getStudents() throws IOException {
-        System.out.println("Скільки студентів буде належати цій кафедрі?");
-        int numOfStudents;
-        do {
-            numOfStudents = getInt();
-        } while (numOfStudents < 0);
+    private static Student[] getStudents() throws IOException {
+        System.out.print("Скільки студентів буде належати цій кафедрі?");
+        int numOfStudents = decide(Integer.MAX_VALUE);
         Student[] students = new Student[numOfStudents];
         for (int i = 0; i < numOfStudents; i++) {
-            System.out.println("Студент " + i + ": ");
+            System.out.print("Студент " + (i + 1) + ": ");
             students[i] = createStudent();
         }
         return students;
     }
 
-    private Teacher[] getTeachers() throws IOException {
-        System.out.println("Скільки викладачів буде належати цій кафедрі?");
-        int numOfTeachers;
-        do {
-            numOfTeachers = getInt();
-        } while (numOfTeachers < 0);
+    private static Teacher[] getTeachers() throws IOException {
+        System.out.print("Скільки викладачів буде належати цій кафедрі?");
+        int numOfTeachers = decide(Integer.MAX_VALUE);
         Teacher[] teachers = new Teacher[numOfTeachers];
         for (int i = 0; i < numOfTeachers; i++) {
-            System.out.println("Викладач " + i + ": ");
+            System.out.print("Викладач " + (i + 1) + ": ");
             teachers[i] = createTeacher();
         }
         return teachers;
     }
 
-    private Student createStudent() throws IOException {
+    private static Student createStudent() throws IOException {
         return new Student(getName("студента"), getSex(), getAge(), getTitle("групи"), getCourse());
     }
 
-    private Teacher createTeacher() throws IOException {
+    private static Teacher createTeacher() throws IOException {
         return new Teacher(getName("викладача"), getSex(), getAge(), getPosition());
     }
 
-    private Position getPosition() throws IOException {
-        System.out.println("Введіть посаду (1 - асистент, 2 - старший викладач, 3 - декан, 4 - президент): ");
+    private static Position getPosition() throws IOException {
+        System.out.print("Введіть посаду (1 - асистент, 2 - старший викладач, 3 - декан, 4 - президент): ");
         switch (decide(4)) {
             case 1:
                 return Position.ASSISTANT;
@@ -198,7 +520,7 @@ public class KvitSlaveMarket {
         }
     }
 
-    private String getTitle(String owner) throws IOException {
+    private static String getTitle(String owner) throws IOException {
         System.out.print("Введіть назву " + owner + ": ");
         String name;
         do {
@@ -207,18 +529,14 @@ public class KvitSlaveMarket {
         return name;
     }
 
-    private int getCourse() throws IOException {
+    private static int getCourse() throws IOException {
         System.out.print("Введіть курс:");
-        int course;
-        do {
-            course = getInt();
-        } while (course < 1 || course > 4);
-        return course;
+        return decide(4);
     }
 
 
-    private Sex getSex() throws IOException {
-        System.out.println("Введіть стать (1 - чоловіча, 2 - жіноча, 3 - інтерсекс): ");
+    private static Sex getSex() throws IOException {
+        System.out.print("Введіть стать (1 - чоловіча, 2 - жіноча, 3 - інтерсекс): ");
         switch (decide(3)) {
             case 1:
                 return Sex.MALE;
@@ -229,16 +547,12 @@ public class KvitSlaveMarket {
         }
     }
 
-    private int getAge() throws IOException {
+    private static int getAge() throws IOException {
         System.out.print("Введіть вік:");
-        int age;
-        do {
-            age = getInt();
-        } while (age < 0 || age > 120);
-        return age;
+        return decide(120);
     }
 
-    private String getName(String owner) throws IOException {
+    private static String getName(String owner) throws IOException {
         System.out.print("Введіть ім'я " + owner + ": ");
         String name;
         do {
