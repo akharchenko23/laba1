@@ -1,6 +1,7 @@
 package utils;
 
 import Humans.*;
+import NaUKMA.Chair;
 
 public class Sorter {
     /**
@@ -10,6 +11,42 @@ public class Sorter {
      */
     public static void sortName(Human[] humans) {
         sortName(humans, 0, humans.length - 1, 0);
+    }
+
+    public static void sortName(Chair[] chairs) {
+        sortName(chairs, 0, chairs.length - 1, 0);
+    }
+
+    private static void sortName(Chair[] chairs, int start, int end, int pos) {
+        boolean itsOk = true;
+        for (int i = start; i <= end; i++) {
+            if (pos >= chairs[i].getName().length() - 1) {
+                itsOk = false;
+                break;
+            }
+        }
+        if (itsOk) {
+            sort(chairs, start, end, pos);
+            char ch = chairs[start].getName().toLowerCase().charAt(pos);
+            int fst = start;
+            int snd = start;
+            for (int i = start + 1; i <= end; i++) {
+                if (chairs[i].getName().toLowerCase().charAt(pos) == ch) {
+                    snd = i;
+                } else {
+                    if (snd - fst > 0) {
+                        sortName(chairs, fst, snd, pos + 1);
+                    } else {
+                        fst = i;
+                        snd = i;
+                        ch = chairs[i].getName().toLowerCase().charAt(pos);
+                    }
+                }
+            }
+            if (snd - fst > 0) {
+                sortName(chairs, fst, snd, pos + 1);
+            }
+        }
     }
 
     private static void sortName(Human[] humans, int start, int end, int pos) {
@@ -40,6 +77,18 @@ public class Sorter {
             }
             if (snd - fst > 0) {
                 sortName(humans, fst, snd, pos + 1);
+            }
+        }
+    }
+
+    private static void sort(Chair[] chairs, int start, int end, int pos) {
+        for (int k = start; k < end - start; k++) {
+            for (int i = start, j = start + 1; j <= end; i++, j++) {
+                int fst = chairs[i].getName().toLowerCase().charAt(pos);
+                int snd = chairs[j].getName().toLowerCase().charAt(pos);
+                if (greater(fst, snd)) {
+                    swap(chairs, i, j);
+                }
             }
         }
     }
@@ -76,9 +125,9 @@ public class Sorter {
         return num;
     }
 
-    private static void swap(Human[] humans, int fst, int snd) {
-        Human temp = humans[fst];
-        humans[fst] = humans[snd];
-        humans[snd] = temp;
+    private static void swap(Object[] objs, int fst, int snd) {
+        Object temp = objs[fst];
+        objs[fst] = objs[snd];
+        objs[snd] = temp;
     }
 }

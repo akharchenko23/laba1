@@ -3,7 +3,6 @@ import Enums.Sex;
 
 import java.util.StringTokenizer;
 
-@SuppressWarnings("unused")
 public class Human {
     protected String name;
     protected Sex sex;

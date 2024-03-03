@@ -39,7 +39,7 @@ public class Faculty {
     }
 
     /**
-     * можна редагувати кафедру
+     * Можна редагувати кафедру
      * @param toChangeChair
      * @param changedChair
      * @return
@@ -54,7 +54,7 @@ public class Faculty {
     }
 
     /**
-     * видаляє кафедру
+     * Видаляє кафедру
      * @param victim кафедра яку видалимо
      */
     private void deleteChair(Chair victim) {
@@ -67,7 +67,7 @@ public class Faculty {
     }
 
     /**
-     * Прибирає усі null із масиву , тим самим зменшуючи його
+     * Прибирає усі null із масиву, тим самим зменшуючи його
      */
     private void noChairsChanged() {
         int count = 0;
@@ -82,6 +82,22 @@ public class Faculty {
             }
         }
         chairs = survivors;
+    }
+
+    public void setChairs(Chair[] chairs) {
+        this.chairs = chairs;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Chair[] getChairs() {
+        return chairs;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String toString(){

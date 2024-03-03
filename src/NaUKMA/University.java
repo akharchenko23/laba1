@@ -47,7 +47,7 @@ public class University {
     }
 
     /**
-     * видалення факультету
+     * Видалення факультету
      * @param victim
      */
     private void deleteFaculty(Faculty victim) {
@@ -60,7 +60,7 @@ public class University {
     }
 
     /**
-     * Прибирає усі null із масиву , тим самим зменшуючи його
+     * Прибирає усі null із масиву, тим самим зменшуючи його
      */
     private void noFacultiesChanged() {
         int count = 0;
@@ -75,6 +75,22 @@ public class University {
             }
         }
         faculties = survivors;
+    }
+
+    public Faculty[] getFaculties() {
+        return faculties;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setFaculties(Faculty[] faculties) {
+        this.faculties = faculties;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String toString(){
