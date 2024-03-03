@@ -29,6 +29,7 @@ public class Tester {
         Faculty fgn = new Faculty("ФГН", chairs);
         faculties = new Faculty[]{fi, fgn};
         University NaUKMA = new University("НаУКМА", faculties);
+
         //тест редагування студента
         ukrLanguageChair.changeStudent(st1, st2);
         Array.print(students);
@@ -40,7 +41,7 @@ public class Tester {
         Array.print(ukrLanguageChair.getStudents());
         ukrLanguageChair.kill(st1);
         Array.print(ukrLanguageChair.getStudents());
-        ukrLanguageChair.addStudent(st1).addStudent(st1).addStudent(st3);
+        ukrLanguageChair.enslaveMoreStudents(st1).enslaveMoreStudents(st1).enslaveMoreStudents(st3);
         Array.print(ukrLanguageChair.getStudents());
         Sorter.sortName(ukrLanguageChair.getStudents());
         Array.print(ukrLanguageChair.getStudents());

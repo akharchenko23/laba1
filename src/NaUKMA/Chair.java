@@ -37,6 +37,7 @@ public class Chair {
      *
      * @param victim Студент якого треба видалити
      */
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void killStudent(Human victim) {
         for (int i = 0; i < students.length; i++) {
             if (students[i].equals(victim)) {
@@ -131,7 +132,7 @@ public class Chair {
      * @param newGuy Студент якого треба додати
      * @return Повертає кафедру з новим студентом
      */
-    public Chair addStudent(Student newGuy) {
+    public Chair enslaveMoreStudents(Student newGuy) {
         Student[] expanded = new Student[students.length + 1];
         for (int i = 0; i < students.length; i++) {
             expanded[i] = students[i];
@@ -147,7 +148,7 @@ public class Chair {
      * @param newGuy Студент якого треба додати
      * @return Повертає кафедру з новим студентом
      */
-    public Chair addTeacher(Teacher newGuy) {
+    public Chair enslaveMoreTeachers(Teacher newGuy) {
         Teacher[] expanded = new Teacher[students.length + 1];
         for (int i = 0; i < teachers.length; i++) {
             expanded[i] = teachers[i];
@@ -156,6 +157,18 @@ public class Chair {
         teachers = expanded;
         return this;
     }
+
+
+    //todo
+//    public Chair moveStudent(Student move){
+////        killStudent(move);
+////        enslaveMoreStudents(move);
+//        return this;
+//    }
+//    public void moveTeacher(Teacher move, Chair destChair, Chair currentChair){
+////        killStudent(move);
+////        enslaveMoreTeachers(move);
+//    }
 
     public Student[] getStudents() {
         return students;
