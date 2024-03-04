@@ -14,7 +14,7 @@ import java.io.IOException;
 import static utils.DataInput.*;
 
 public class KvitSlaveMarket {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         Student[] studentsMathChair, studentsITchair, studentsLiteratureChair, studentsHistoryChair, studentsEconomicsChair;
         Teacher[] teachersMathChair, teachersITchair, teachersLiteratureChair, teachersHistoryChair, teachersEconomicsChair;
         Chair[] chairsFI, chairsFGN, chairsFEN;
@@ -88,7 +88,7 @@ public class KvitSlaveMarket {
     }
 
 
-    private static void welcomeToUniversity(University university) throws IOException {
+    private static void welcomeToUniversity(University university)  {
         int fate = 0;
         do {
             System.out.println("Ласкаво просимо до університету " + university.getName() + "!");
@@ -110,7 +110,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void facultyWork(University university) throws IOException {
+    private static void facultyWork(University university)  {
         int victim;
         int fate = 0;
         do {
@@ -136,7 +136,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void chairWork(Faculty faculty) throws IOException {
+    private static void chairWork(Faculty faculty)  {
         int fate = 0;
         int victim;
         do {
@@ -165,7 +165,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void peopleWork(Chair chair) throws IOException {
+    private static void peopleWork(Chair chair) {
         int victim;
         int fate = 0;
         do {
@@ -210,7 +210,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void chairInfo(Chair chair) throws IOException {
+    private static void chairInfo(Chair chair){
         int course;
         int fate = 0;
         do {
@@ -255,7 +255,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void teacherWork(Teacher teacher) throws IOException {
+    private static void teacherWork(Teacher teacher) {
         int fate = 0;
         do {
             System.out.println(teacher);
@@ -279,7 +279,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void studentWork(Student student) throws IOException {
+    private static void studentWork(Student student) {
         int fate = 0;
         do {
             System.out.println(student);
@@ -319,7 +319,7 @@ public class KvitSlaveMarket {
         }
     }
 
-    private static void universitySearch(University university) throws IOException {
+    private static void universitySearch(University university) {
         if (whatToDo("Знайти викладача", "Знайти студента") == 1) {
             searchForNames(Sorter.sortName(university.getTeachers()));
         } else {
@@ -327,7 +327,7 @@ public class KvitSlaveMarket {
         }
     }
 
-    private static void searchForStudents(University university) throws IOException {
+    private static void searchForStudents(University university) {
         int fate = 0;
         do {
             switch (whatToDo("Шукати за ім'ям", "Шукати за курсом", "Шукати за спеціальністю", "Піти звідси")) {
@@ -347,7 +347,7 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
-    private static void searchForGroup(Student[] students) throws IOException {
+    private static void searchForGroup(Student[] students){
         System.out.print("Введіть групу: ");
         String find;
         boolean notFound = true;
@@ -366,7 +366,7 @@ public class KvitSlaveMarket {
         if (notFound) System.out.println("Нікого");
     }
 
-    private static void searchForCourse(Student[] students) throws IOException {
+    private static void searchForCourse(Student[] students){
         Sorter.sortName(students);
         System.out.print("Введіть курс: ");
         int find;
@@ -383,7 +383,7 @@ public class KvitSlaveMarket {
         if (notFound) System.out.println("Нікого");
     }
 
-    private static void searchForNames(Human[] humans) throws IOException {
+    private static void searchForNames(Human[] humans) {
         System.out.print("Введіть ім'я: ");
         String find;
         boolean notFound = true;
@@ -403,7 +403,7 @@ public class KvitSlaveMarket {
         if (notFound) System.out.println("Нікого");
     }
 
-    private static void universityInfo(University university) throws IOException {
+    private static void universityInfo(University university){
         int fate = 0;
         do {
             switch (whatToDo("Загальний виклад університету", "Список студентів за курсами", "Загальний список студентів", "Загальний список викладачів", "Піти звідси")) {
@@ -426,7 +426,7 @@ public class KvitSlaveMarket {
         }while(fate != 2);
     }
 
-    private static int whatToDo(String... strings) throws IOException {
+    private static int whatToDo(String... strings) {
         int count = strings.length;
         StringBuilder sb = new StringBuilder();
         sb.append("\nЩо бажаєте зробити?\n");
@@ -439,11 +439,11 @@ public class KvitSlaveMarket {
         return decide(count);
     }
 
-    private static Faculty createFaculty() throws IOException {
+    private static Faculty createFaculty() {
         return new Faculty(getTitle("факультету"), getChairs());
     }
 
-    private static Chair[] getChairs() throws IOException {
+    private static Chair[] getChairs() {
         System.out.print("Скільки кафедр буде містити цей факультет?");
         int numOfChairs = decide(Integer.MAX_VALUE);
         Chair[] chairs = new Chair[numOfChairs];
@@ -454,11 +454,11 @@ public class KvitSlaveMarket {
         return chairs;
     }
 
-    private static Chair createChair() throws IOException {
+    private static Chair createChair(){
         return new Chair(getTitle("кафедри"), getTeachers(), getStudents());
     }
 
-    private static Student[] getStudents() throws IOException {
+    private static Student[] getStudents() {
         System.out.print("Скільки студентів буде належати цій кафедрі?");
         int numOfStudents = decide(Integer.MAX_VALUE);
         Student[] students = new Student[numOfStudents];
@@ -469,7 +469,7 @@ public class KvitSlaveMarket {
         return students;
     }
 
-    private static Teacher[] getTeachers() throws IOException {
+    private static Teacher[] getTeachers(){
         System.out.print("Скільки викладачів буде належати цій кафедрі?");
         int numOfTeachers = decide(Integer.MAX_VALUE);
         Teacher[] teachers = new Teacher[numOfTeachers];
@@ -480,15 +480,15 @@ public class KvitSlaveMarket {
         return teachers;
     }
 
-    private static Student createStudent() throws IOException {
+    private static Student createStudent() {
         return new Student(getName("студента"), getSex(), getAge(), getTitle("групи"), getCourse());
     }
 
-    private static Teacher createTeacher() throws IOException {
+    private static Teacher createTeacher() {
         return new Teacher(getName("викладача"), getSex(), getAge(), getPosition());
     }
 
-    private static Position getPosition() throws IOException {
+    private static Position getPosition()  {
         System.out.print("Введіть посаду (1 - асистент, 2 - старший викладач, 3 - декан, 4 - президент): ");
         switch (decide(4)) {
             case 1:
@@ -502,7 +502,7 @@ public class KvitSlaveMarket {
         }
     }
 
-    private static String getTitle(String owner) throws IOException {
+    private static String getTitle(String owner) {
         System.out.print("Введіть назву " + owner + ": ");
         String name;
         do {
@@ -511,13 +511,13 @@ public class KvitSlaveMarket {
         return name;
     }
 
-    private static int getCourse() throws IOException {
+    private static int getCourse(){
         System.out.print("Введіть курс:");
         return decide(4);
     }
 
 
-    private static Sex getSex() throws IOException {
+    private static Sex getSex() {
         System.out.print("Введіть стать (1 - чоловіча, 2 - жіноча, 3 - інтерсекс): ");
         switch (decide(3)) {
             case 1:
@@ -529,12 +529,12 @@ public class KvitSlaveMarket {
         }
     }
 
-    private static int getAge() throws IOException {
+    private static int getAge(){
         System.out.print("Введіть вік:");
         return decide(120);
     }
 
-    private static String getName(String owner) throws IOException {
+    private static String getName(String owner)  {
         System.out.print("Введіть ім'я " + owner + ": ");
         String name;
         do {

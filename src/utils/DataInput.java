@@ -6,43 +6,135 @@ import java.io.InputStreamReader;
 
 public final class DataInput {
 
-    public static Double getDouble() throws IOException {
-        String s = getString();
-        return Double.valueOf(s);
+    private static void writeText(String wr){
+        if (wr == null)
+            System.out.print("Введіть дані: ");
+        else
+            System.out.print(wr);
     }
 
-    public static Float getFloat() throws IOException {
+    public static Long getLong() throws IOException{
         String s = getString();
-        return Float.valueOf(s);
+        Long value = Long.valueOf(s);
+        return value;
     }
-
-    public static Long getLong() throws IOException {
-        String s = getString();
-        return Long.valueOf(s);
+    /*
+    public static char getChar() {
+        try {
+            String s = getString();
+            return s.charAt(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+            return '\0'; // Return a default value (null character) in case of an exception
+        }
     }
-
-    public static char getChar() throws IOException {
+*/
+    public static char getChar() throws IOException{
         String s = getString();
         return s.charAt(0);
     }
 
-    public static Integer getInt() throws IOException {
+    /*
+            public static Integer getInt(String wr){
+                writeText(wr);
+                String s = "";
+                try {
+                    s = getString();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                Integer value = Integer.valueOf(s);
+                return value;
+
+            }
+
+        public static Integer getInt() {
+
+            writeText("Enter an integer:");
+            String s = "";
+            try {
+                s = getString();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle the exception as needed
+            }
+
+            try {
+                Integer value = Integer.valueOf(s);
+                return value;
+            } catch (NumberFormatException e) {
+                // Handle the case where the input is not a valid integer
+                e.printStackTrace();
+                return null; // Or throw an exception, return a default value, etc.
+            }
+        }
+
+    public static Integer getInt() {
+        writeText("integer:");
         String s = getString();
-        return Integer.valueOf(s);
+
+        try {
+            Integer value = Integer.valueOf(s);
+            return value;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    */
+    public static Integer getInt() {
+        while (true) {
+           // writeText("integer:");
+            String s = getString();
+
+            try {
+                Integer value = Integer.valueOf(s);
+                return value;
+            } catch (NumberFormatException e) {
+                System.out.println("Це не integer. Спробуйте ще раз.");
+            }
+        }
+    }
+    public static String getString() {
+        String s = "";
+        try {
+            InputStreamReader isr = new InputStreamReader(System.in);
+            BufferedReader br = new BufferedReader(isr);
+            s = br.readLine();
+        }catch (IOException ex){
+            System.out.println("Can't read the string");
+            System.exit(0);
+        }
+        return s;
     }
 
-    public static String getString() throws IOException {
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(isr);
-        return br.readLine();
+    public static Double getDouble() {
+        writeText("grade:");
+        String s = getString();
+
+        try {
+            return Double.valueOf(s);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            // Handle the case where the input is not a valid double
+            System.out.println("Invalid input. Please enter a valid double.");
+            return null; // Or throw an exception, return a default value, etc.
+        }
+
+
+    }
+    public static int decide(int numOfChoice) {
+        int fate = getInt();
+        while (fate < 1 || fate > numOfChoice) {
+            System.out.print("Невірне значення! Будь ласка, введіть число від 1 до " + numOfChoice + ": ");
+            fate = getInt();
+        }
+        return fate;
     }
 
-    /**
-     * Makes user enter a number from 1 to numOfChoice
-     * @param numOfChoice A max value of choice (usually 2)
-     * @return Number from 1 t numOfChoice that can be used in a switch statement to decide something
-     * @throws IOException In case user is too stupid to enter natural number
-     */
+/*
     public static int decide(int numOfChoice) throws IOException {
         int fate = getInt();
         while (fate < 1 || fate > numOfChoice) {
@@ -51,4 +143,31 @@ public final class DataInput {
         }
         return fate;
     }
+*/
+
+    /*
+public static String getString() {
+    try {
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        return br.readLine();
+    } catch (IOException e) {
+        e.printStackTrace(); // You might want to log the exception
+        return ""; // Return a default value (empty string) in case of an exception
+    }
+}
+
+    public static Double getDouble() {
+        writeText("Enter a double:");
+        String s = "";
+        try {
+            s = getString();
+            return Double.valueOf(s);
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+            return null; // Or throw an exception, return a default value, etc.
+        }
+    }
+*/
 }
