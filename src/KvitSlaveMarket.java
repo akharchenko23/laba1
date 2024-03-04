@@ -15,6 +15,9 @@ import static utils.DataInput.*;
 
 public class KvitSlaveMarket {
     public static void main(String[] args)  {
+        /**
+         * ініціалізація студентів, викладачів, кафедр, факультетів, університету, всіх об'єктів. заповнення дефолтних масивів
+         */
         Student[] studentsMathChair, studentsITchair, studentsLiteratureChair, studentsHistoryChair, studentsEconomicsChair;
         Teacher[] teachersMathChair, teachersITchair, teachersLiteratureChair, teachersHistoryChair, teachersEconomicsChair;
         Chair[] chairsFI, chairsFGN, chairsFEN;
@@ -87,7 +90,10 @@ public class KvitSlaveMarket {
         System.out.println("Гарного вам дня!");
     }
 
-
+    /**
+     * головне меню
+     * @param university приймає університет для використання його назви
+     */
     private static void welcomeToUniversity(University university)  {
         int fate = 0;
         do {
@@ -110,6 +116,10 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
+    /**
+     * реалізує взаємодію з користувачем з приводу усіх можливих дій із факультетами
+     * @param university приймає університет для використання його назви
+     */
     private static void facultyWork(University university)  {
         int victim;
         int fate = 0;
@@ -136,6 +146,10 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
+    /**
+     * реалізує взаємодію з користувачем з приводу усіх можливих дій із кафедрами
+     * @param faculty приймаю кафедру для роботи над нею
+     */
     private static void chairWork(Faculty faculty)  {
         int fate = 0;
         int victim;
@@ -165,6 +179,10 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
+    /**
+     * працює із викладачами та студентами певної кафедри
+     * @param chair приймає кафедру і витягає з неї дані студентів та викладачів
+     */
     private static void peopleWork(Chair chair) {
         int victim;
         int fate = 0;
@@ -210,6 +228,10 @@ public class KvitSlaveMarket {
         } while (fate != 2);
     }
 
+    /**
+     * виводить інформацію списками студентів за різними критеріями
+     * @param chair
+     */
     private static void chairInfo(Chair chair){
         int course;
         int fate = 0;
@@ -254,7 +276,11 @@ public class KvitSlaveMarket {
             }
         } while (fate != 2);
     }
-
+    /**
+     * Метод для роботи з вчителем, дозволяє змінювати особисту інформацію про вчителя.
+     *
+     * @param teacher Об'єкт вчителя, з яким потрібно працювати
+     */
     private static void teacherWork(Teacher teacher) {
         int fate = 0;
         do {
@@ -278,7 +304,11 @@ public class KvitSlaveMarket {
             }
         } while (fate != 2);
     }
-
+    /**
+     * Метод для роботи зі студентом, дозволяє змінювати особисту інформацію про студента.
+     *
+     * @param student Об'єкт студента, з яким потрібно працювати
+     */
     private static void studentWork(Student student) {
         int fate = 0;
         do {
@@ -304,21 +334,33 @@ public class KvitSlaveMarket {
             }
         } while (fate != 2);
     }
-
+    /**
+     * Відображає список кафедр.
+     *
+     * @param chairs Масив кафедр
+     */
     private static void showcase(Chair[] chairs) {
         System.out.println("Наявні кафедри:");
         for (int i = 0; i < chairs.length; i++) {
             System.out.println((i + 1) + ". " + chairs[i].getName());
         }
     }
-
+    /**
+     * Відображає список факультетів.
+     *
+     * @param faculties Масив факультетів
+     */
     private static void showcase(Faculty[] faculties) {
         System.out.println("Наявні факультети:");
         for (int i = 0; i < faculties.length; i++) {
             System.out.println((i + 1) + ". " + faculties[i].getName());
         }
     }
-
+    /**
+     * Пошук в університеті за ім'ям.
+     *
+     * @param university Об'єкт університету
+     */
     private static void universitySearch(University university) {
         if (whatToDo("Знайти викладача", "Знайти студента") == 1) {
             searchForNames(Sorter.sortName(university.getTeachers()));
@@ -327,6 +369,10 @@ public class KvitSlaveMarket {
         }
     }
 
+    /**
+     * пошук студентів
+     * @param university
+     */
     private static void searchForStudents(University university) {
         int fate = 0;
         do {
@@ -346,7 +392,11 @@ public class KvitSlaveMarket {
             }
         } while (fate != 2);
     }
-
+    /**
+     * Пошук студентів за групою.
+     *
+     * @param students Масив студентів
+     */
     private static void searchForGroup(Student[] students){
         System.out.print("Введіть групу: ");
         String find;
@@ -365,7 +415,11 @@ public class KvitSlaveMarket {
         }
         if (notFound) System.out.println("Нікого");
     }
-
+    /**
+     * Пошук студентів за курсом.
+     *
+     * @param students Масив студентів
+     */
     private static void searchForCourse(Student[] students){
         Sorter.sortName(students);
         System.out.print("Введіть курс: ");
@@ -382,7 +436,11 @@ public class KvitSlaveMarket {
         }
         if (notFound) System.out.println("Нікого");
     }
-
+    /**
+     * Пошук за ім'ям в університеті.
+     *
+     * @param humans Масив об'єктів, які належать до класу Human
+     */
     private static void searchForNames(Human[] humans) {
         System.out.print("Введіть ім'я: ");
         String find;
@@ -402,7 +460,11 @@ public class KvitSlaveMarket {
         }
         if (notFound) System.out.println("Нікого");
     }
-
+    /**
+     * Інформація про університет.
+     *
+     * @param university Об'єкт університету
+     */
     private static void universityInfo(University university){
         int fate = 0;
         do {
@@ -425,7 +487,12 @@ public class KvitSlaveMarket {
             }
         }while(fate != 2);
     }
-
+    /**
+     * Питає користувача, що робити, і повертає вибір.
+     *
+     * @param strings Масив рядків з варіантами дій
+     * @return Вибір користувача
+     */
     private static int whatToDo(String... strings) {
         int count = strings.length;
         StringBuilder sb = new StringBuilder();
@@ -438,11 +505,19 @@ public class KvitSlaveMarket {
         System.out.print("\nВаш вибір: ");
         return decide(count);
     }
-
+    /**
+     * Створює новий факультет.
+     *
+     * @return Новий об'єкт факультету
+     */
     private static Faculty createFaculty() {
         return new Faculty(getTitle("факультету"), getChairs());
     }
-
+    /**
+     * Створює масив кафедр.
+     *
+     * @return Масив кафедр
+     */
     private static Chair[] getChairs() {
         System.out.print("Скільки кафедр буде містити цей факультет?");
         int numOfChairs = decide(Integer.MAX_VALUE);
@@ -453,11 +528,19 @@ public class KvitSlaveMarket {
         }
         return chairs;
     }
-
+    /**
+     * Створює нову кафедру.
+     *
+     * @return Новий об'єкт кафедри
+     */
     private static Chair createChair(){
         return new Chair(getTitle("кафедри"), getTeachers(), getStudents());
     }
-
+    /**
+     * Створює масив студентів.
+     *
+     * @return Масив студентів
+     */
     private static Student[] getStudents() {
         System.out.print("Скільки студентів буде належати цій кафедрі?");
         int numOfStudents = decide(Integer.MAX_VALUE);
@@ -468,7 +551,11 @@ public class KvitSlaveMarket {
         }
         return students;
     }
-
+    /**
+     * Створює масив викладачів.
+     *
+     * @return Масив викладачів
+     */
     private static Teacher[] getTeachers(){
         System.out.print("Скільки викладачів буде належати цій кафедрі?");
         int numOfTeachers = decide(Integer.MAX_VALUE);
@@ -479,15 +566,27 @@ public class KvitSlaveMarket {
         }
         return teachers;
     }
-
+    /**
+     * Створює нового студента.
+     *
+     * @return Новий об'єкт студента
+     */
     private static Student createStudent() {
         return new Student(getName("студента"), getSex(), getAge(), getTitle("групи"), getCourse());
     }
-
+    /**
+     * Створює нового викладача.
+     *
+     * @return Новий об'єкт викладача
+     */
     private static Teacher createTeacher() {
         return new Teacher(getName("викладача"), getSex(), getAge(), getPosition());
     }
-
+    /**
+     * Вибір посади викладача.
+     *
+     * @return Посада викладача
+     */
     private static Position getPosition()  {
         System.out.print("Введіть посаду (1 - асистент, 2 - старший викладач, 3 - декан, 4 - президент): ");
         switch (decide(4)) {
@@ -501,7 +600,12 @@ public class KvitSlaveMarket {
                 return Position.PRESIDENT;
         }
     }
-
+    /**
+     * Введення назви.
+     *
+     * @param owner Рядок, що вказує на тип введення (наприклад, "групи", "факультету" тощо)
+     * @return Введена назва
+     */
     private static String getTitle(String owner) {
         System.out.print("Введіть назву " + owner + ": ");
         String name;
@@ -510,13 +614,21 @@ public class KvitSlaveMarket {
         } while (name == null);
         return name;
     }
-
+    /**
+     * Введення номеру курсу.
+     *
+     * @return Номер курсу
+     */
     private static int getCourse(){
         System.out.print("Введіть курс:");
         return decide(4);
     }
 
-
+    /**
+     * Вибір статі.
+     *
+     * @return Стать
+     */
     private static Sex getSex() {
         System.out.print("Введіть стать (1 - чоловіча, 2 - жіноча, 3 - інтерсекс): ");
         switch (decide(3)) {
@@ -528,12 +640,21 @@ public class KvitSlaveMarket {
                 return Sex.INTERSEX;
         }
     }
-
+    /**
+     * Введення віку.
+     *
+     * @return Вік
+     */
     private static int getAge(){
         System.out.print("Введіть вік:");
         return decide(120);
     }
-
+    /**
+     * Введення імені.
+     *
+     * @param owner Рядок, що вказує на тип введення (наприклад, "студента", "викладача" тощо)
+     * @return Введене ім'я
+     */
     private static String getName(String owner)  {
         System.out.print("Введіть ім'я " + owner + ": ");
         String name;

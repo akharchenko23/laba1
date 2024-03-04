@@ -1,5 +1,8 @@
 package Enums;
 
+/**
+ * енам посад в університеті
+ */
 public enum Position {
     PRESIDENT, DEAN, SENIOR, ASSISTANT;
     public String toString(){

@@ -100,6 +100,11 @@ public class Faculty {
     public String getName() {
         return name;
     }
+
+    /**
+     * Отримати масив студентів на кафедрі.
+     * @return Масив студентів.
+     */
     public Student[] getStudents(){
         Student[] students = new Student[0];
         for(Chair chair : chairs){
@@ -114,7 +119,10 @@ public class Faculty {
         }
         return students;
     }
-
+    /**
+     * Отримати масив викладачів на кафедрі.
+     * @return Масив викладачів.
+     */
     public Teacher[] getTeachers(){
         Teacher[] teachers = new Teacher[0];
         for(Chair chair : chairs){
@@ -129,7 +137,10 @@ public class Faculty {
         }
         return teachers;
     }
-
+    /**
+     * Перетворює об'єкт кафедри у рядок.
+     * @return Рядок, що містить інформацію про кафедру.
+     */
     public String toString(){
         Sorter.sortName(chairs);
         StringBuilder sb = new StringBuilder();

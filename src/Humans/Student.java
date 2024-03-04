@@ -2,6 +2,9 @@ package Humans;
 
 import Enums.Sex;
 
+/**
+ * клас студента
+ */
 //Студент успадковує від людини поля ім'я, вік, стать. Має свої групи (у значенні спеціальність) та курс
 public class Student extends Human {
 
@@ -13,6 +16,14 @@ public class Student extends Human {
 
     }
 
+    /**
+     * сетап студента
+     * @param name
+     * @param sex
+     * @param age
+     * @param group
+     * @param course
+     */
     public Student(String name, Sex sex, int age, String group, int course) {
         super(name, sex, age);
         this.group = group;

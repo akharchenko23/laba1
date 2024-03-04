@@ -1,5 +1,8 @@
 package Enums;
 
+/**
+ * енам статей
+ */
 public enum Sex {
     MALE, FEMALE, INTERSEX;
 

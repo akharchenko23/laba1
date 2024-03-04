@@ -11,6 +11,12 @@ public class Chair {
     private Teacher[] teachers;
     private String name;
 
+    /**
+     * сетап кафедри
+     * @param name
+     * @param teachers
+     * @param students
+     */
     public Chair(String name, Teacher[] teachers, Student[] students) {
         this.students = students;
         this.teachers = teachers;

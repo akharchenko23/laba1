@@ -3,19 +3,25 @@ package utils;
 import Humans.*;
 import NaUKMA.Chair;
 import NaUKMA.Faculty;
-
+/**
+ * Утилітний клас для сортування об'єктів за іменем.
+ */
 public class Sorter {
     /**
-     * Sorts an array of humans based on their names
-     *
-     * @param humans An array of humans (can be students or teachers too)
+     * Сортує масив об'єктів типу Human за іменем.
+     * @param humans Масив об'єктів типу Human.
+     * @return Відсортований масив об'єктів типу Human.
      */
     public static Human[] sortName(Human[] humans) {
         if (humans.length == 0) return humans;
         sortName(humans, 0, humans.length - 1, 0);
         return humans;
     }
-
+    /**
+     * Сортує масив об'єктів типу Student за курсом.
+     * @param students Масив об'єктів типу Student.
+     * @return Відсортований масив об'єктів типу Student.
+     */
     public static Student[] sortCourse(Student[] students){
         if (students.length == 0) return students;
         Sorter.sortName(students);
@@ -29,19 +35,33 @@ public class Sorter {
         }
         return students;
     }
-
+    /**
+     * Сортує масив об'єктів типу Chair за назвою.
+     * @param chairs Масив об'єктів типу Chair.
+     * @return Відсортований масив об'єктів типу Chair.
+     */
     public static Chair[] sortName(Chair[] chairs) {
         if (chairs.length == 0) return chairs;
         sortName(chairs, 0, chairs.length - 1, 0);
         return chairs;
     }
-
+    /**
+     * Сортує масив об'єктів типу Faculty за назвою.
+     * @param faculties Масив об'єктів типу Faculty.
+     * @return Відсортований масив об'єктів типу Faculty.
+     */
     public static Faculty[] sortName(Faculty[] faculties) {
         if (faculties.length == 0) return faculties;
         sortName(faculties, 0, faculties.length - 1, 0);
         return faculties;
     }
-
+    /**
+     * Рекурсивний метод сортування масиву Faculty за назвою.
+     * @param faculties Масив об'єктів типу Faculty.
+     * @param start Початковий індекс.
+     * @param end Кінцевий індекс.
+     * @param pos Поточна позиція для сортування.
+     */
     private static void sortName(Faculty[] faculties, int start, int end, int pos) {
         boolean itsOk = true;
         for (int i = start; i <= end; i++) {
@@ -73,7 +93,13 @@ public class Sorter {
             }
         }
     }
-
+    /**
+     * Рекурсивний метод сортування масиву Chair за назвою.
+     * @param chairs Масив об'єктів типу Chair.
+     * @param start Початковий індекс.
+     * @param end Кінцевий індекс.
+     * @param pos Поточна позиція для сортування.
+     */
     private static void sortName(Chair[] chairs, int start, int end, int pos) {
         boolean itsOk = true;
         for (int i = start; i <= end; i++) {
@@ -136,6 +162,14 @@ public class Sorter {
             }
         }
     }
+
+    /**
+     * сортує факультети
+     * @param faculties
+     * @param start
+     * @param end
+     * @param pos
+     */
     private static void sort(Faculty[] faculties, int start, int end, int pos) {
         for (int k = start; k < end; k++) {
             for (int i = start, j = start + 1; j <= end; i++, j++) {
@@ -147,6 +181,14 @@ public class Sorter {
             }
         }
     }
+
+    /**
+     * сортує кафедри
+     * @param chairs
+     * @param start
+     * @param end
+     * @param pos
+     */
     private static void sort(Chair[] chairs, int start, int end, int pos) {
         for (int k = start; k < end; k++) {
             for (int i = start, j = start + 1; j <= end; i++, j++) {
@@ -159,6 +201,13 @@ public class Sorter {
         }
     }
 
+    /**
+     * сортує людей
+     * @param humans
+     * @param start
+     * @param end
+     * @param pos
+     */
     private static void sort(Human[] humans, int start, int end, int pos) {
         for (int k = start; k < end; k++) {
             for (int i = start, j = start + 1; j <= end; i++, j++) {
@@ -171,12 +220,23 @@ public class Sorter {
         }
     }
 
+    /**
+     * перевіряє чи більше
+     * @param fst
+     * @param snd
+     * @return
+     */
     private static boolean greater(int fst, int snd) {
         double uno = check(fst);
         double duo = check(snd);
         return uno > duo;
     }
 
+    /**
+     * перевірка
+     * @param num
+     * @return
+     */
     private static double check(int num) {
         switch (num) {
             case 1169: //ґ
@@ -191,6 +251,12 @@ public class Sorter {
         return num;
     }
 
+    /**
+     * міняє місцями параметри
+     * @param objs
+     * @param fst
+     * @param snd
+     */
     private static void swap(Object[] objs, int fst, int snd) {
         Object temp = objs[fst];
         objs[fst] = objs[snd];

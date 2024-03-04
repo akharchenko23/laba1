@@ -1,6 +1,13 @@
 package utils;
 
+/**
+ * утилітний клас для виводу масивів
+ */
 public class Array {
+    /**
+     * виводить масив
+     * @param array
+     */
     public static void print(Object[] array) {
         StringBuilder sb = new StringBuilder();
         for (Object obj : array) {
@@ -9,6 +16,10 @@ public class Array {
         System.out.println(sb);
     }
 
+    /**
+     * виводить масив масивів
+     * @param array
+     */
     public static void print(Object[][] array) {
         StringBuilder sb = new StringBuilder();
         for (Object[] row : array) {

@@ -3,7 +3,9 @@ package NaUKMA;
 import Humans.Student;
 import Humans.Teacher;
 import utils.Sorter;
-
+/**
+ * Клас, що представляє університет.
+ */
 public class University {
     private Faculty[] faculties;
     private String name;
@@ -80,23 +82,37 @@ public class University {
         }
         faculties = survivors;
     }
-
+    /**
+     * Масив факультетів університету.
+     */
     public Faculty[] getFaculties() {
         return faculties;
     }
-
+    /**
+     * Отримати назву університету.
+     * @return Назва університету.
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * Встановити масив факультетів університету.
+     * @param faculties Масив факультетів.
+     */
     public void setFaculties(Faculty[] faculties) {
         this.faculties = faculties;
     }
-
+    /**
+     * Встановити назву університету.
+     * @param name Назва університету.
+     */
     public void setName(String name) {
         this.name = name;
     }
-
+    /**
+     * Отримати масив студентів університету з усіх факультетів.
+     * @return Масив студентів.
+     */
     public Student[] getStudents(){
         Student[] students = new Student[0];
         for(Faculty faculty : faculties){
@@ -111,7 +127,10 @@ public class University {
         }
         return students;
     }
-
+    /**
+     * Отримати масив викладачів університету з усіх факультетів.
+     * @return Масив викладачів.
+     */
     public Teacher[] getTeachers(){
         Teacher[] teachers = new Teacher[0];
         for(Faculty faculty : faculties){
@@ -126,7 +145,10 @@ public class University {
         }
         return teachers;
     }
-
+    /**
+     * Перетворює об'єкт університету у рядок.
+     * @return Рядок, що містить інформацію про університет.
+     */
     public String toString(){
         Sorter.sortName(faculties);
         StringBuilder sb = new StringBuilder();
