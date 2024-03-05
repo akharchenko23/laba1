@@ -174,18 +174,6 @@ public class Chair {
         return this;
     }
 
-
-    //todo
-//    public Chair moveStudent(Student move){
-////        killStudent(move);
-////        enslaveMoreStudents(move);
-//        return this;
-//    }
-//    public void moveTeacher(Teacher move, Chair destChair, Chair currentChair){
-////        killStudent(move);
-////        enslaveMoreTeachers(move);
-//    }
-
     public Student[] getStudents() {
         return students;
     }

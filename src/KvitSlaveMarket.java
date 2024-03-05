@@ -9,14 +9,12 @@ import NaUKMA.University;
 import utils.Array;
 import utils.Sorter;
 
-import java.io.IOException;
-
 import static utils.DataInput.*;
 
 public class KvitSlaveMarket {
     public static void main(String[] args)  {
-        /**
-         * ініціалізація студентів, викладачів, кафедр, факультетів, університету, всіх об'єктів. заповнення дефолтних масивів
+        /*
+          Ініціалізація студентів, викладачів, кафедр, факультетів, університету, всіх об'єктів. заповнення дефолтних масивів
          */
         Student[] studentsMathChair, studentsITchair, studentsLiteratureChair, studentsHistoryChair, studentsEconomicsChair;
         Teacher[] teachersMathChair, teachersITchair, teachersLiteratureChair, teachersHistoryChair, teachersEconomicsChair;
@@ -91,7 +89,7 @@ public class KvitSlaveMarket {
     }
 
     /**
-     * головне меню
+     * Головне меню
      * @param university приймає університет для використання його назви
      */
     private static void welcomeToUniversity(University university)  {
@@ -117,7 +115,7 @@ public class KvitSlaveMarket {
     }
 
     /**
-     * реалізує взаємодію з користувачем з приводу усіх можливих дій із факультетами
+     * Реалізує взаємодію з користувачем з приводу усіх можливих дій із факультетами
      * @param university приймає університет для використання його назви
      */
     private static void facultyWork(University university)  {
@@ -125,16 +123,21 @@ public class KvitSlaveMarket {
         int fate = 0;
         do {
             showcase(university.getFaculties());
-            switch (whatToDo("Редагувати факультет", "Створити факультет", "Видалити факультет", "Піти звідси")) {
+            switch (whatToDo("Інформація","Редагувати факультет", "Створити факультет", "Видалити факультет", "Піти звідси")) {
                 case 1:
+                    System.out.print("Про який факультет бажаєте дізнатись? ");
+                    victim = decide(university.getFaculties().length);
+                    facultyInfo(university.getFaculties()[victim - 1]);
+                    break;
+                case 2:
                     System.out.print("Який факультет бажаєте редагувати? ");
                     victim = decide(university.getFaculties().length);
                     chairWork(university.getFaculties()[victim - 1]);
                     break;
-                case 2:
+                case 3:
                     university.addFaculty(createFaculty());
                     break;
-                case 3:
+                case 4:
                     System.out.print("Який факультет бажаєте видалити? (Всіх студентів буде відраховано, а викладачів звільнено): ");
                     victim = decide(university.getFaculties().length);
                     university.deleteFaculty(university.getFaculties()[victim - 1]);
@@ -147,7 +150,28 @@ public class KvitSlaveMarket {
     }
 
     /**
-     * реалізує взаємодію з користувачем з приводу усіх можливих дій із кафедрами
+     * Реалізує взаємодію із користувачем, дозволяючи переглянути впорядковані за абеткою списки студентів та викладачів кафедри
+     * @param faculty Факультет про який надається інформація
+     */
+    private static void facultyInfo(Faculty faculty) {
+        int fate = 0;
+        do {
+            switch (whatToDo("Загальний список студентів","Загальний список викладачів", "Піти звідси")) {
+                case 1:
+                    Array.print(Sorter.sortName(faculty.getStudents()));
+                    break;
+                case 2:
+                    Array.print(Sorter.sortName(faculty.getTeachers()));
+                    break;
+                default:
+                    fate = 2;
+                    break;
+            }
+        } while (fate != 2);
+    }
+
+    /**
+     * Реалізує взаємодію з користувачем з приводу усіх можливих дій із кафедрами
      * @param faculty приймаю кафедру для роботи над нею
      */
     private static void chairWork(Faculty faculty)  {
@@ -180,7 +204,7 @@ public class KvitSlaveMarket {
     }
 
     /**
-     * працює із викладачами та студентами певної кафедри
+     * Працює із викладачами та студентами певної кафедри
      * @param chair приймає кафедру і витягає з неї дані студентів та викладачів
      */
     private static void peopleWork(Chair chair) {
@@ -229,12 +253,13 @@ public class KvitSlaveMarket {
     }
 
     /**
-     * виводить інформацію списками студентів за різними критеріями
-     * @param chair
+     * Виводить інформацію списками студентів за різними критеріями
+     * @param chair Кафедра про яку треба щось дізнатись
      */
     private static void chairInfo(Chair chair){
         int course;
         int fate = 0;
+        int j;
         do {
             switch (whatToDo("Список студентів за курсами", "Загальний список студентів", "Загальний список викладачів", "Знайти студентів за курсом", "Знайти студентів за курсом та посортувати за іменем", "Піти звідси")) {
                 case 1:
@@ -250,25 +275,29 @@ public class KvitSlaveMarket {
                     Array.print(chair.getTeachers());
                     break;
                 case 4:
-                    System.out.println("Який курс вас цікавить? ");
+                    System.out.print("Який курс вас цікавить? ");
                     course = decide(4);
-                    for (int i = 0, j = 1; i < chair.getStudents().length; i++) {
+                    j = 1;
+                    for (int i = 0; i < chair.getStudents().length; i++) {
                         if (chair.getStudents()[i].getCourse() == course) {
                             System.out.println(j + ". " + chair.getStudents()[i]);
                             j++;
                         }
                     }
+                    if(j==1) System.out.println("Нікого не знайдено.");
                     break;
                 case 5:
-                    System.out.println("Який курс вас цікавить? ");
+                    System.out.print("Який курс вас цікавить? ");
                     course = decide(4);
                     Sorter.sortName(chair.getStudents());
-                    for (int i = 0, j = 1; i < chair.getStudents().length; i++) {
+                    j = 1;
+                    for (int i = 0; i < chair.getStudents().length; i++) {
                         if (chair.getStudents()[i].getCourse() == course) {
                             System.out.println(j + ". " + chair.getStudents()[i]);
                             j++;
                         }
                     }
+                    if(j==1) System.out.println("Нікого не знайдено.");
                     break;
                 default:
                     fate = 2;
@@ -370,8 +399,8 @@ public class KvitSlaveMarket {
     }
 
     /**
-     * пошук студентів
-     * @param university
+     * Пошук студентів
+     * @param university Університет в якому ведеться пошук людей
      */
     private static void searchForStudents(University university) {
         int fate = 0;
@@ -611,11 +640,15 @@ public class KvitSlaveMarket {
         String name;
         do {
             name = getString();
+            if (containsNums(name)){
+                System.out.print("Назва не має містити числа або знаки! Спробуйте ще раз:");
+                name = null;
+            }
         } while (name == null);
         return name;
     }
     /**
-     * Введення номеру курсу.
+     * Введення номера курсу.
      *
      * @return Номер курсу
      */
@@ -660,7 +693,20 @@ public class KvitSlaveMarket {
         String name;
         do {
             name = getString();
+            if (containsNums(name)){
+                System.out.print("Ім'я не має містити числа або знаки! Спробуйте ще раз:");
+                name = null;
+            }
         } while (name == null);
         return name;
+    }
+
+    private static boolean containsNums(String name) {
+        for(int i = 0; i < name.length(); i++){
+            if((name.charAt(i) < 1000 || name.charAt(i) > 1200) && name.charAt(i) != ' '){
+                return true;
+            }
+        }
+        return false;
     }
 }
