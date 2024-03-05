@@ -9,6 +9,8 @@ import NaUKMA.University;
 import utils.Array;
 import utils.Sorter;
 
+import java.util.StringTokenizer;
+
 import static utils.DataInput.*;
 
 public class KvitSlaveMarket {
@@ -485,6 +487,20 @@ public class KvitSlaveMarket {
             if (find.toLowerCase().equals(name)) {
                 System.out.println(human);
                 notFound = false;
+            }
+        }
+        StringTokenizer st;
+        for (Human human : humans) {
+            st = new StringTokenizer(human.getName());
+            while(st.hasMoreTokens()) {
+                String name = st.nextToken();
+                name = st.nextToken();
+                if (name.length() < find.length()) continue;
+                name = name.toLowerCase().substring(0, find.length());
+                if (find.toLowerCase().equals(name)) {
+                    System.out.println(human);
+                    notFound = false;
+                }
             }
         }
         if (notFound) System.out.println("Нікого");
