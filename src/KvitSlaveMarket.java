@@ -186,7 +186,7 @@ public class KvitSlaveMarket {
                     faculty.setName(getTitle("факультету"));
                     break;
                 case 2:
-                    System.out.print("Який факультет бажаєте редагувати? ");
+                    System.out.print("Яку кафедру бажаєте редагувати? ");
                     victim = decide(faculty.getChairs().length);
                     peopleWork(faculty.getChairs()[victim - 1]);
                     break;
