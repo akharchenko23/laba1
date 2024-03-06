@@ -62,11 +62,11 @@ public class KvitSlaveMarket {
         studentsLiteratureChair = new Student[]{st15, st16, st17, st18};
         studentsHistoryChair = new Student[]{st7, st8};
 
-        teachersMathChair = new Teacher[]{t1, t2, t13};
-        teachersITchair = new Teacher[]{t3, t4, t13};
+        teachersMathChair = new Teacher[]{t1, t2};
+        teachersITchair = new Teacher[]{t3, t4};
         teachersEconomicsChair = new Teacher[]{t5, t6, t7, t8, t13};
-        teachersLiteratureChair = new Teacher[]{t9, t10, t13};
-        teachersHistoryChair = new Teacher[]{t11, t12, t13};
+        teachersLiteratureChair = new Teacher[]{t9, t10};
+        teachersHistoryChair = new Teacher[]{t11, t12};
 
         Chair mathChair = new Chair("Кафедра математики", teachersMathChair, studentsMathChair);
         Chair ITChair = new Chair("Кафедра інформатики", teachersITchair, studentsITchair);
